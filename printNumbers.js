@@ -6,3 +6,5 @@ function printNumbers(n) {
   }
   
   printNumbers(0);
+  console.log("Success");
+  
