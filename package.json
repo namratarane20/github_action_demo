@@ -1,0 +1,87 @@
+{
+	"name": "fod-sap-standalone-batch",
+	"version": "1.0.0",
+	"license": "UNLICENSED",
+	"description": "fod-sap-standalone-batch",
+	"main": "main.js",
+	"scripts": {
+		"serverless": "serverless",
+		"tsc": "tsc",
+		"build": "rimraf ./dist && tsc",
+		"test": "nyc mocha",
+		"nodeploy": "serverless deploy -n",
+		"deploy:dev": "npm run build && serverless deploy --stage dev",
+		"deploy:test": "npm run build && serverless deploy --stage test",
+		"deploy:qa": "npm run build && serverless deploy --stage qa",
+		"deploy:prod": "npm run build && serverless deploy --stage prod",
+		"package": "zip -rq fod-sap-standalone-batch.zip dist node_modules package*.json serverless.yml && mv fod-sap-standalone-batch.zip",
+		"lint": "tslint \"src/**/*.ts\" --force",
+		"test:mocha": "mocha",
+		"test:watch": "mocha -w --watch-extensions ts",
+		"test:nyc": "nyc mocha",
+		"deploy": "npm run build && serverless deploy",
+		"local": "tsc && node dist/main.js"
+	},
+	"nyc": {
+		"include": [
+			"src/**/*.ts",
+			"src/**/*.tsx"
+		],
+		"exclude": [
+			"src/**/*.d.ts",
+			"src/dataAccess/db-connection.ts",
+			"src/dataAccess/dataAccessLayer.ts",
+			"src/main.ts",
+			"src/util/util.ts",
+			"src/services/services.ts"
+		],
+		"extension": [
+			".ts",
+			".tsx"
+		],
+		"require": [
+			"ts-node/register"
+		],
+		"reporter": [
+			"text-summary",
+			"html"
+		],
+		"all": true,
+		"sourceMap": true,
+		"instrument": true
+	},
+	"dependencies": {
+		"@types/mathjs": "^6.0.5",
+		"aws-lambda": "^0.1.2",
+		"current-week-number": "^1.0.7",
+		"exceljs": "^4.2.0",
+		"g": "^2.0.1",
+		"lambda-log": "^2.1.0",
+		"lodash": "^4.17.15",
+		"mathjs": "^7.5.0",
+		"moment-timezone": "^0.5.34",
+		"nodemailer": "^6.7.2",
+		"objects-to-csv": "^1.3.6",
+		"pg": "^7.5.0",
+		"pg-format": "^1.0.4",
+		"readline": "^1.3.0"
+	},
+	"devDependencies": {
+		"@types/aws-lambda": "8.10.34",
+		"@types/chai": "^3.4.35",
+		"@types/lodash": "^4.14.108",
+		"@types/mocha": "^2.2.39",
+		"@types/node": "^8.5.1",
+		"aws-sdk": "^2.733.0",
+		"chai": "^3.5.0",
+		"mocha": "^3.5.3",
+		"nyc": "^15.1.0",
+		"rimraf": "^2.6.2",
+		"serverless": "^1.24.1",
+		"sinon": "^9.2.2",
+		"ts-mock-imports": "^1.3.1",
+		"ts-node": "^4.0.2",
+		"tslint": "^5.8.0",
+		"typescript": "^3.2.1"
+	}
+}
