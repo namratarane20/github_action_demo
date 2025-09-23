@@ -45,3 +45,5 @@ jobs:
         run: npm install
       - name: Run tests namrata
         run: npm test
+      - name: Run a script
+        run: echo "Code was pushed to main branch!"
