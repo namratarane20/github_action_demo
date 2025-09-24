@@ -5,3 +5,5 @@ describe('Sample Test', function() {
     assert.strictEqual(true, true);
   });
 });
+
+// ... ---
